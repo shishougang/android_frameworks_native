@@ -51,6 +51,9 @@ public:
     status_t getphys(buffer_handle_t handle, void** paddr);
 #endif
 
+    status_t perform(buffer_handle_t handle, int operation,
+                     uint32_t w, uint32_t h, uint32_t format);
+
     // dumps information about the mapping of this handle
     void dump(buffer_handle_t handle);
 
