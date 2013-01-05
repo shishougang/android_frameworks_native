@@ -129,7 +129,8 @@ void DisplayDevice::init(EGLConfig config)
 #ifndef BOARD_EGL_NEEDS_LEGACY_FB
     ANativeWindow* const window = mNativeWindow.get();
 #else
-    ANativeWindow* const window = new FramebufferNativeWindow();
+    sp<FramebufferNativeWindow> nativeWindow = new FramebufferNativeWindow();
+    ANativeWindow* const window = nativeWindow.get();
 #endif
 
     int format;
