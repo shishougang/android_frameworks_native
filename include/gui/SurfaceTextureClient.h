@@ -93,7 +93,6 @@ private:
     int dispatchSetCrop(va_list args);
     int dispatchSetPostTransformCrop(va_list args);
     int dispatchSetUsage(va_list args);
-    int dispatchUpdateBuffersGeometry(va_list args);
     int dispatchSetBuffersSize(va_list args);
     int dispatchLock(va_list args);
     int dispatchUnlockAndPost(va_list args);
@@ -105,7 +104,6 @@ protected:
     virtual int perform(int operation, va_list args);
     virtual int query(int what, int* value) const;
     virtual int setSwapInterval(int interval);
-    virtual int updateBuffersGeometry(int w, int h, int f);
     virtual int setBuffersSize(int size);
     virtual int lockBuffer_DEPRECATED(ANativeWindowBuffer* buffer);
 
