@@ -38,7 +38,6 @@ enum {
     CANCEL_BUFFER,
     QUERY,
     SET_SYNCHRONOUS_MODE,
-    SET_BUFFERS_SIZE,
     CONNECT,
     DISCONNECT,
 };
@@ -157,18 +156,6 @@ public:
         return result;
     }
 
-    virtual status_t setBuffersSize(int size) {
-        Parcel data, reply;
-        data.writeInterfaceToken(ISurfaceTexture::getInterfaceDescriptor());
-        data.writeInt32(size);
-        status_t result = remote()->transact(SET_BUFFERS_SIZE, data, &reply);
-        if (result != NO_ERROR) {
-            return result;
-        }
-        result = reply.readInt32();
-        return result;
-    }
-
     virtual status_t connect(int api, QueueBufferOutput* output) {
         Parcel data, reply;
         data.writeInterfaceToken(ISurfaceTexture::getInterfaceDescriptor());
@@ -276,13 +263,6 @@ status_t BnSurfaceTexture::onTransact(
             CHECK_INTERFACE(ISurfaceTexture, data, reply);
             bool enabled = data.readInt32();
             status_t res = setSynchronousMode(enabled);
-            reply->writeInt32(res);
-            return NO_ERROR;
-        } break;
-        case SET_BUFFERS_SIZE: {
-            CHECK_INTERFACE(ISurfaceTexture, data, reply);
-            int size = data.readInt32();
-            status_t res = setBuffersSize(size);
             reply->writeInt32(res);
             return NO_ERROR;
         } break;
